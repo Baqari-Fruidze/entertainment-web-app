@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
 import { Link } from "react-router-dom";
+import { Context } from "../App";
 
 export default function Login() {
+  const { userInfo, setUserInfo } = useContext(Context);
+  const handleClickEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, emailAdress: event.target.value });
+  };
+  const handleClickPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, password: event.target.value });
+  };
   return (
     <Parent>
       <img src={logo} alt="" />
       <Form>
         <h1>Login</h1>
-        <input type="text" placeholder="Email address" />
-        <input type="text" placeholder="Password" />
+        <input
+          type="text"
+          placeholder="Email address"
+          value={userInfo.emailAdress}
+          onChange={handleClickEmail}
+        />
+        <input
+          type="text"
+          placeholder="Password"
+          value={userInfo.password}
+          onChange={handleClickPassword}
+        />
         <button>Login to your account</button>
         <p>
-          Don’t have an account?{" "}
+          Don’t have an account?
           <Link to={"/signUp"}>
             <span>Sign Up</span>
           </Link>
@@ -47,7 +65,7 @@ const Form = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 0 0 1.8rem 1.6rem;
+    padding: 0.5rem 0 1.8rem 1.6rem;
     border: none;
     border-bottom: 1px solid grey;
     background: var(--Semi-Dark-Blue, #161d2f);

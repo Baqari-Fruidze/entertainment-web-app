@@ -1,36 +1,138 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Context } from "../App";
 
 export default function Login() {
-  const location = useLocation();
+  const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
+  const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, emailAdress: event.target.value });
+  };
+  const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, password: event.target.value });
+  };
+  const RpasswordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserInfo({ ...userInfo, Rpassword: event.target.value });
+  };
+  function registerUser() {
+    if (userInfo.password.length === 0) {
+      setEror((prevEror) => {
+        return { ...prevEror, empty: { ...prevEror.empty, password: true } };
+      });
+    } else {
+      setEror((prevEror) => {
+        return { ...prevEror, empty: { ...prevEror.empty, password: false } };
+      });
+    }
+    if (userInfo.emailAdress.length === 0) {
+      setEror((prevEror) => {
+        return { ...prevEror, empty: { ...prevEror.empty, email: true } };
+      });
+    } else {
+      setEror((prevEror) => {
+        return { ...prevEror, empty: { ...prevEror.empty, email: false } };
+      });
+    }
+
+    // if (userInfo.Rpassword.length === 0) {
+    //   setEror((prevEror) => {
+    //     return { ...prevEror, empty: { ...prevEror.empty, Rpassword: false } };
+    //   });
+    // } else {
+    //   setEror((prevEror) => {
+    //     return { ...prevEror, empty: { ...prevEror.empty, Rpassword: true } };
+    //   });
+    // }
+    if (userInfo.password !== userInfo.Rpassword) {
+      setEror({ ...eror, same: true });
+    }
+    localStorage.setItem("user", JSON.stringify(userInfo));
+  }
+  console.log(eror);
+  console.log(userInfo);
+  console.log(userInfo.password.length === 0);
   return (
     <Parent>
       <img src={logo} alt="" />
       <Form>
         <h1>Sign up</h1>
-        <input type="text" placeholder="Email address" />
-        <input type="text" placeholder="Password" />
-        <input type="text" placeholder="Repeat Password" />
-        <button>Create an account</button>
+        <div className="emailContainer">
+          <input
+            type="text"
+            placeholder="Email address"
+            value={userInfo.emailAdress}
+            onChange={emailHandler}
+          />
+          {eror.empty.email ? <EmptyEror>Can’t be empty</EmptyEror> : null}
+        </div>
+        <div className="passwordContainer">
+          <input
+            type="text"
+            placeholder="Password"
+            value={userInfo.password}
+            onChange={passwordHandler}
+          />
+          {eror.empty.password ? <EmptyEror>Can’t be empty</EmptyEror> : null}
+        </div>
+        <div className="repeatedPassContainer">
+          <input
+            type="text"
+            placeholder="Repeat Password"
+            value={userInfo.Rpassword}
+            onChange={RpasswordHandler}
+          />
+          {eror.same ? <ErorSame>PASSWORD MUST BE SAME</ErorSame> : null}
+          {eror.empty.Rpassword ? <EmptyEror>Can’t be empty</EmptyEror> : null}
+        </div>
+
+        <button onClick={() => registerUser()}>Create an account</button>
         <p>
           Alread have an account?
           <Link to={"/login"}>
-            <span>Login</span>
+            <span className="login">Login</span>
           </Link>
         </p>
       </Form>
     </Parent>
   );
 }
+
+const EmptyEror = styled.span`
+  top: 20%;
+  right: 0;
+  color: var(--Red, #fc4747);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Outfit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+`;
+const ErorSame = styled.span`
+  color: red;
+  font-size: 9px;
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+`;
 const Form = styled.div`
   padding: 2.4rem 2.4rem 3.2rem;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   background: var(--Semi-Dark-Blue, #161d2f);
+  .repeatedPassContainer {
+    position: relative;
+  }
+  .passwordContainer {
+    position: relative;
+  }
+  .emailContainer {
+    position: relative;
+  }
   & h1 {
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;
@@ -43,6 +145,7 @@ const Form = styled.div`
     margin-bottom: 4rem;
   }
   & input {
+    width: 100%;
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;
     font-family: Outfit;
@@ -50,11 +153,11 @@ const Form = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 0 0 1.8rem 1.6rem;
+    padding: 1rem 0 1rem 1.6rem;
     border: none;
     border-bottom: 1px solid grey;
     background: var(--Semi-Dark-Blue, #161d2f);
-    margin-bottom: 2.4rem;
+    /* margin-bottom: 2.4rem; */
   }
   ::placeholder {
     color: var(--Pure-White, #fff);
@@ -93,7 +196,7 @@ const Form = styled.div`
     font-weight: 400;
     line-height: normal;
   }
-  & span {
+  & .login {
     margin-left: 0.8rem;
     color: var(--Red, #fc4747);
     font-feature-settings: "clig" off, "liga" off;
