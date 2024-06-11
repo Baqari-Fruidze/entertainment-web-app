@@ -4,9 +4,13 @@ import logo from "/assets/logo.svg";
 import { json, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
+import { useState } from "react";
 
 export default function Login() {
   const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
+  // const [emptyPasswod, setEmptyPassword] = useState<boolean>(false);
+  // const [emptyEmail, setEmpyEmail] = useState<boolean>(false);
+  // const [Rpassword, setRpassword] = useState<boolean>(false);
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, emailAdress: event.target.value });
   };
@@ -17,42 +21,27 @@ export default function Login() {
     setUserInfo({ ...userInfo, Rpassword: event.target.value });
   };
   function registerUser() {
-    if (userInfo.password.length === 0) {
-      setEror((prevEror) => {
-        return { ...prevEror, empty: { ...prevEror.empty, password: true } };
-      });
-    } else {
-      setEror((prevEror) => {
-        return { ...prevEror, empty: { ...prevEror.empty, password: false } };
-      });
-    }
-    if (userInfo.emailAdress.length === 0) {
-      setEror((prevEror) => {
-        return { ...prevEror, empty: { ...prevEror.empty, email: true } };
-      });
-    } else {
-      setEror((prevEror) => {
-        return { ...prevEror, empty: { ...prevEror.empty, email: false } };
-      });
-    }
+    const newErrors = {
+      ...eror,
+      empty: {
+        email: userInfo.emailAdress.length === 0,
+        password: userInfo.password.length === 0,
+        Rpassword: userInfo.Rpassword.length === 0,
+      },
+      same: userInfo.password !== userInfo.Rpassword,
+    };
 
-    // if (userInfo.Rpassword.length === 0) {
-    //   setEror((prevEror) => {
-    //     return { ...prevEror, empty: { ...prevEror.empty, Rpassword: false } };
-    //   });
-    // } else {
-    //   setEror((prevEror) => {
-    //     return { ...prevEror, empty: { ...prevEror.empty, Rpassword: true } };
-    //   });
-    // }
-    if (userInfo.password !== userInfo.Rpassword) {
-      setEror({ ...eror, same: true });
+    setEror(newErrors);
+    if (
+      !newErrors.empty.email &&
+      !newErrors.empty.password &&
+      !newErrors.empty.Rpassword &&
+      !newErrors.same
+    ) {
+      localStorage.setItem("user", JSON.stringify(userInfo));
     }
-    localStorage.setItem("user", JSON.stringify(userInfo));
   }
-  console.log(eror);
-  console.log(userInfo);
-  console.log(userInfo.password.length === 0);
+
   return (
     <Parent>
       <img src={logo} alt="" />

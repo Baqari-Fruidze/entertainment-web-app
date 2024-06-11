@@ -1,9 +1,8 @@
 export interface Teror {
   same: boolean;
   empty: {
-    email: boolean;
     password: boolean;
     Rpassword: boolean;
+    email: boolean;
   };
-  valid: boolean;
 }
