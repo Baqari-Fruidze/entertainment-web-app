@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import searcIcon from "/assets/icon-search.svg";
+import Slider from "../components/Slider";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         id=""
         placeholder="Search for movies or TV series"
       />
+      <Slider />
     </Parent>
   );
 }
@@ -41,5 +43,5 @@ const Inputt = styled.input`
 `;
 const Parent = styled.div`
   background: var(--Dark-Blue, #10141e);
-  padding: 2.6rem 1.6rem 3rem 1.6rem;
+  padding: 2.6rem 0 3rem 1.6rem;
 `;

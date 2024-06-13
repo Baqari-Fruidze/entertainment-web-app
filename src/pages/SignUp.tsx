@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
-import { json, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
-import { useState } from "react";
 
 export default function Login() {
   const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
