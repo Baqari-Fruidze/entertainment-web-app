@@ -1,37 +1,73 @@
 import React from "react";
 import styled from "styled-components";
 import data from "../data.json";
-import bookmarkIcon from "/assets/icon-bookmark-empty.svg";
+import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
+import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
+import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 import { Tdata } from "../types/Data";
 import { Ttrending } from "../types/TrendingType";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function Slider() {
   const filtered = data.filter((item) => item.isTrending === true);
-  console.log(filtered);
   return (
     <Parent>
       <Hone>Trending</Hone>
+
       <MoviesCon>
         {filtered.map((item) => (
           <SingleMovieCon backGroundTrending={item.thumbnail.trending}>
             <Uul>
               <li>{item.year}</li>
               <li>
-                <Img src={movieIcon} alt="" /> {item.category}
+                {item.category === "Movie" ? (
+                  <MovieIcon src={movieIcon} alt="" />
+                ) : (
+                  <TvSeriesIcon src={tvSeriesIcon} alt="" />
+                )}
+                {item.category}
               </li>
               <li>{item.rating}</li>
             </Uul>
             <span>{item.title}</span>
+            <Circle>
+              <img src={bookmarkIconEmpty} alt="" />
+            </Circle>
           </SingleMovieCon>
         ))}
       </MoviesCon>
     </Parent>
   );
 }
-const Img = styled.img`
+
+const Circle = styled.div`
+  top: 8px;
+  right: 8px;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(16, 20, 30, 1), rgba(255, 255, 255, 1));
+`;
+const TvSeriesIcon = styled.img`
   width: 12px;
   height: 12px;
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(342deg)
+    brightness(108%) contrast(100%);
+  margin-right: 6px;
+`;
+const MovieIcon = styled.img`
+  width: 12px;
+  height: 12px;
+  filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(342deg)
+    brightness(108%) contrast(100%);
+  margin-right: 6px;
 `;
 const Hone = styled.h1`
   color: var(--Pure-White, #fff);
@@ -66,6 +102,7 @@ const Uul = styled.ul`
 const SingleMovieCon = styled.div<{
   backGroundTrending: Ttrending | undefined;
 }>`
+  position: relative;
   background-image: url(${(props) => props?.backGroundTrending?.small});
   background-repeat: no-repeat;
   background-size: cover;
