@@ -10,7 +10,6 @@ import personImg from "/assets/image-avatar.png";
 
 export default function Header() {
   const location = useLocation();
-  console.log(location);
   return (
     <Container>
       <img src={logo} alt="" />
@@ -21,14 +20,34 @@ export default function Header() {
           alt=""
           location={location.pathname}
         />
-        <img src={tvSeriesNavigation} alt="" />
-        <img src={bookmarkNavigation} alt="" />
+        <TvSeriesIcon
+          src={tvSeriesNavigation}
+          alt=""
+          location={location.pathname}
+        />
+        <BookmarkedIcon
+          src={bookmarkNavigation}
+          alt=""
+          location={location.pathname}
+        />
       </ImagesCon>
       <Image src={personImg} alt="" />
     </Container>
   );
 }
 
+const BookmarkedIcon = styled.img<{ location: string }>`
+  filter: ${(props) =>
+    props.location === "/bookmarked"
+      ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
+      : null};
+`;
+const TvSeriesIcon = styled.img<{ location: string }>`
+  filter: ${(props) =>
+    props.location === "/tvSeries"
+      ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
+      : null};
+`;
 const MoviesIcon = styled.img<{ location: string }>`
   filter: ${(props) =>
     props.location === "/movies"
