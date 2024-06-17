@@ -13,11 +13,12 @@ import { TuserContext } from "./types/ContextType";
 import { Teror } from "./types/Eror";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import data from "./data.json";
-import "swiper/css";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { useEffect } from "react";
+import { Tdata } from "./types/Data";
+import info from "../src/data.json";
+import Movies from "./pages/Movies";
+import TVSeries from "./pages/TVSeries";
+import Bookmarked from "./pages/Bookmarked";
 
 export const Context = createContext<TuserContext>({
   userInfo: { emailAdress: "", password: "", Rpassword: "" },
@@ -31,6 +32,8 @@ export const Context = createContext<TuserContext>({
     same: false,
   },
   setEror: () => {},
+  data: [],
+  setData: () => {},
 });
 
 function ConditionalHeader() {
@@ -42,6 +45,8 @@ function ConditionalHeader() {
   );
 }
 function App() {
+  const [data, setData] = useState<Tdata>(info);
+
   const [userInfo, setUserInfo] = useState<TuserInfo>({
     password: "",
     emailAdress: "",
@@ -56,7 +61,9 @@ function App() {
     same: false,
   });
   return (
-    <Context.Provider value={{ userInfo, setUserInfo, eror, setEror }}>
+    <Context.Provider
+      value={{ userInfo, setUserInfo, eror, setEror, data, setData }}
+    >
       <BrowserRouter>
         <ConditionalHeader />
 
@@ -65,6 +72,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="tvSeries" element={<TVSeries />} />
+          <Route path="bookmarked" element={<Bookmarked />} />
         </Routes>
       </BrowserRouter>
     </Context.Provider>

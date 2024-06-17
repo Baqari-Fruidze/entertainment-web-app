@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import logo from "/assets/logo.svg";
 import homeNavigation from "/assets/icon-nav-home.svg";
 import moviesNavigation from "/assets/icon-nav-movies.svg";
@@ -8,12 +9,18 @@ import bookmarkNavigation from "/assets/icon-nav-bookmark.svg";
 import personImg from "/assets/image-avatar.png";
 
 export default function Header() {
+  const location = useLocation();
+  console.log(location);
   return (
     <Container>
       <img src={logo} alt="" />
       <ImagesCon>
-        <img src={homeNavigation} alt="" />
-        <img src={moviesNavigation} alt="" />
+        <HomeIcon src={homeNavigation} alt="" location={location.pathname} />
+        <MoviesIcon
+          src={moviesNavigation}
+          alt=""
+          location={location.pathname}
+        />
         <img src={tvSeriesNavigation} alt="" />
         <img src={bookmarkNavigation} alt="" />
       </ImagesCon>
@@ -21,6 +28,19 @@ export default function Header() {
     </Container>
   );
 }
+
+const MoviesIcon = styled.img<{ location: string }>`
+  filter: ${(props) =>
+    props.location === "/movies"
+      ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
+      : null};
+`;
+const HomeIcon = styled.img<{ location: string }>`
+  filter: ${(props) =>
+    props.location === "/home"
+      ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
+      : null};
+`;
 const Image = styled.img`
   width: 24px;
   height: 24px;

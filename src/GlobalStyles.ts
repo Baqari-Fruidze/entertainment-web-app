@@ -13,4 +13,5 @@ body{
     font-family: "Outfit", sans-serif;
     background: var(--Dark-Blue, #10141E);
 }
+
 `;

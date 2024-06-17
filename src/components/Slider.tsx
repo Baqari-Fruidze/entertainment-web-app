@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import data from "../data.json";
 import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 import { Tdata } from "../types/Data";
 import { Ttrending } from "../types/TrendingType";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { Context } from "../App";
 
 export default function Slider() {
+  const { data } = useContext(Context);
   const filtered = data.filter((item) => item.isTrending === true);
   return (
     <Parent>
       <Hone>Trending</Hone>
 
       <MoviesCon>
-        {filtered.map((item) => (
-          <SingleMovieCon backGroundTrending={item.thumbnail.trending}>
+        {filtered.map((item, index) => (
+          <SingleMovieCon
+            backGroundTrending={item.thumbnail.trending}
+            key={index}
+          >
             <Uul>
               <li>{item.year}</li>
               <li>
@@ -34,7 +35,11 @@ export default function Slider() {
             </Uul>
             <span>{item.title}</span>
             <Circle>
-              <img src={bookmarkIconEmpty} alt="" />
+              {item.isBookmarked ? (
+                <img src={bookmarkIconFull} alt="" />
+              ) : (
+                <img src={bookmarkIconEmpty} alt="" />
+              )}
             </Circle>
           </SingleMovieCon>
         ))}
@@ -44,6 +49,7 @@ export default function Slider() {
 }
 
 const Circle = styled.div`
+  opacity: 0.6;
   top: 8px;
   right: 8px;
   width: 3.2rem;
@@ -53,7 +59,7 @@ const Circle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(rgba(16, 20, 30, 1), rgba(255, 255, 255, 1));
+  background: rgba(90, 105, 143, 1);
 `;
 const TvSeriesIcon = styled.img`
   width: 12px;
@@ -122,6 +128,7 @@ const MoviesCon = styled.div`
   overflow: scroll;
   display: flex;
   gap: 1.6rem;
+  position: relative;
 `;
 const Parent = styled.div`
   display: flex;
