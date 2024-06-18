@@ -15,8 +15,8 @@ export default function Movies() {
       <MoviesCon>
         {data
           .filter((item) => item.category === "Movie")
-          .map((item) => (
-            <div className="singleCon">
+          .map((item, index) => (
+            <div className="singleCon" key={index}>
               <MovieImage src={item.thumbnail.regular.small} alt="" />
               <Uul>
                 <li>{item.year}</li>
@@ -107,7 +107,8 @@ const MoviesCon = styled.div`
 const Parent = styled.div`
   padding: 2.6rem 1.6rem 2rem 1.6rem;
   & h1 {
-    margin-bottom: 2.6rem;
+    margin-bottom: 2.4rem;
+    margin-top: 2.4rem;
     color: var(--Pure-White, #fff);
     font-family: Outfit;
     font-size: 20px;
