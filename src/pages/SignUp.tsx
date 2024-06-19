@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "/assets/logo.svg";
 import { Link } from "react-router-dom";
 import { Context } from "../App";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
@@ -34,6 +35,7 @@ export default function Login() {
       !newErrors.same
     ) {
       localStorage.setItem("user", JSON.stringify(userInfo));
+      <Navigate to={"login"} />;
     }
   }
 

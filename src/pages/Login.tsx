@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../App";
 import { useState } from "react";
 import { TloginEror } from "../types/LoginEror";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [empt, setEmpt] = useState<TloginEror>({
     password: false,
     emailAdress: false,
@@ -18,18 +20,37 @@ export default function Login() {
   const handleClickPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, password: event.target.value });
   };
-  function userInfoChecker() {
-    const savedUserInfo = localStorage.getItem("user");
+  const userInfoChecker = () => {
+    const savedUserInfo:
+      | string
+      | { password: string; emailAdress: string }
+      | null = localStorage.getItem("user");
+
     if (savedUserInfo) {
-      savedUser = JSON.parse(savedUserInfo);
+      try {
+        const parsedUserInfo = JSON.parse(savedUserInfo);
+        if (
+          typeof parsedUserInfo === "object" &&
+          parsedUserInfo !== null &&
+          "password" in parsedUserInfo &&
+          "emailAdress" in parsedUserInfo
+        ) {
+          if (userInfo.password !== parsedUserInfo.password) {
+            setEmpt((prevEmpt) => ({ ...prevEmpt, password: true }));
+            return;
+          }
+          if (userInfo.emailAdress !== parsedUserInfo.emailAdress) {
+            setEmpt((prevEmpt) => ({ ...prevEmpt, emailAdress: true }));
+            return;
+          }
+          navigate("/home");
+        }
+      } catch (error) {
+        alert("error occured");
+      }
     }
-    if (userInfo.password !== savedUserInfo.password) {
-      setEmpt(() => ({ ...empt, password: true }));
-    }
-    if (userInfo.emailAdress !== savedUserInfo.emailAdress) {
-      setEmpt(() => ({ ...empt, emailAdress: true }));
-    }
-  }
+  };
+
   return (
     <Parent>
       <img src={logo} alt="" />
@@ -53,7 +74,7 @@ export default function Login() {
         {empt.password ? (
           <PaswordErorSpan>incorrect Password</PaswordErorSpan>
         ) : null}
-        <button>Login to your account</button>
+        <button onClick={userInfoChecker}>Login to your account</button>
         <p>
           Don’t have an account?
           <Link to={"/signUp"}>
@@ -65,6 +86,8 @@ export default function Login() {
   );
 }
 const EmailAddressErorSpan = styled.span`
+  bottom: 0;
+  position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Outfit;
@@ -74,6 +97,7 @@ const EmailAddressErorSpan = styled.span`
   line-height: normal;
 `;
 const PaswordErorSpan = styled.span`
+  position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Outfit;
@@ -100,6 +124,7 @@ const Form = styled.div`
     margin-bottom: 4rem;
   }
   & input {
+    position: relative;
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;
     font-family: Outfit;

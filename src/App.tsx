@@ -34,6 +34,7 @@ export const Context = createContext<TuserContext>({
   setEror: () => {},
   data: [],
   setData: () => {},
+  statusChanger: () => {},
 });
 
 function ConditionalHeader() {
@@ -45,8 +46,14 @@ function ConditionalHeader() {
   );
 }
 function App() {
+  const statusChanger = (id: string) => {
+    setData(() => [
+      ...data.map((item) =>
+        item.title === id ? { ...item, isBookmarked: !item.isBookmarked } : item
+      ),
+    ]);
+  };
   const [data, setData] = useState<Tdata>(info);
-
   const [userInfo, setUserInfo] = useState<TuserInfo>({
     password: "",
     emailAdress: "",
@@ -62,7 +69,15 @@ function App() {
   });
   return (
     <Context.Provider
-      value={{ userInfo, setUserInfo, eror, setEror, data, setData }}
+      value={{
+        userInfo,
+        setUserInfo,
+        eror,
+        setEror,
+        data,
+        setData,
+        statusChanger,
+      }}
     >
       <BrowserRouter>
         <ConditionalHeader />

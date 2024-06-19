@@ -9,4 +9,5 @@ export interface TuserContext {
   setEror: Dispatch<SetStateAction<Teror>>;
   data: Tdata;
   setData: React.Dispatch<React.SetStateAction<Tdata>>;
+  statusChanger: (id: string) => void;
 }

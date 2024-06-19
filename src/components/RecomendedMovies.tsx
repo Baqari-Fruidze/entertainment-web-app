@@ -7,7 +7,7 @@ import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 
 export default function RecomendedMovies() {
-  const { data } = useContext(Context);
+  const { data, statusChanger } = useContext(Context);
   return (
     <RecomendedMoviesCon>
       {data.map((item, index) => (
@@ -26,7 +26,7 @@ export default function RecomendedMovies() {
             <li>{item.rating}</li>
           </Uul>
           <Hone>{item.title}</Hone>
-          <Circle>
+          <Circle onClick={() => statusChanger(item.title)}>
             {item.isBookmarked ? (
               <img src={bookmarkIconFull} alt="" />
             ) : (
