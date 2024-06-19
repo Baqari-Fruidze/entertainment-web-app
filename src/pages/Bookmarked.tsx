@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Context } from "../App";
 import Input from "../components/Input";
 import BookmarkedMovies from "../components/BookmarkedMovies";
+import BookmarkedTvSeries from "../components/BookmarkedTvSeries";
 
 export default function Bookmarked() {
   const { data } = useContext(Context);
@@ -10,6 +11,7 @@ export default function Bookmarked() {
     <Parent>
       <Input />
       <BookmarkedMovies />
+      <BookmarkedTvSeries />
     </Parent>
   );
 }

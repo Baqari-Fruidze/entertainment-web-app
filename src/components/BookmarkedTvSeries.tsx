@@ -1,27 +1,28 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../App";
-import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
-import movieIcon from "/assets/icon-nav-movies.svg";
+import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
+import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 
-export default function BookmarkedMovies() {
+export default function BookmarkedTvSeries() {
   const { data } = useContext(Context);
   return (
     <>
-      <HOne>Bookmarked Movies</HOne>
-      <BookmarkedMoviesCon>
+      <HOne>Bookmarked TV Series</HOne>
+      <BookmarkedTvSeriesCon>
         {data
           .filter(
-            (item) => item.isBookmarked === true && item.category === "Movie"
+            (item) =>
+              item.isBookmarked === true && item.category === "TV Series"
           )
           .map((item, index) => (
             <div key={index} className="singleCon">
-              <MovieImage src={item.thumbnail.regular.small} alt="" />
+              <TvSeriesImg src={item.thumbnail.regular.small} alt="" />
               <Uul>
                 <li>{item.year}</li>
                 <li>
-                  <MovieIcon src={movieIcon} alt="" />
+                  <TvSeriesIcon src={tvSeriesIcon} alt="" />
 
                   {item.category}
                 </li>
@@ -37,7 +38,7 @@ export default function BookmarkedMovies() {
               </Circle>
             </div>
           ))}
-      </BookmarkedMoviesCon>
+      </BookmarkedTvSeriesCon>
     </>
   );
 }
@@ -63,18 +64,6 @@ const Htwo = styled.h2`
   font-weight: 400;
   line-height: normal;
 `;
-const MovieImage = styled.img`
-  border-radius: 8px;
-  width: 16.4rem;
-  height: 11rem;
-`;
-const MovieIcon = styled.img`
-  width: 10px;
-  height: 10px;
-  filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(334deg) brightness(103%)
-    contrast(100%);
-  margin-right: 6px;
-`;
 const Uul = styled.ul`
   list-style: none;
   padding: 0.5rem 0;
@@ -96,18 +85,27 @@ const Uul = styled.ul`
     margin-right: 8px;
   }
 `;
-const BookmarkedMoviesCon = styled.div`
+const TvSeriesIcon = styled.img`
+  width: 10px;
+  height: 10px;
+  filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(334deg) brightness(103%)
+    contrast(100%);
+  margin-right: 6px;
+`;
+const TvSeriesImg = styled.img`
+  border-radius: 8px;
+  width: 16.4rem;
+  height: 11rem;
+`;
+const BookmarkedTvSeriesCon = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 2.4rem;
   & .singleCon {
     position: relative;
   }
 `;
 const HOne = styled.h1`
-  margin-top: 2.6rem;
-  margin-bottom: 2.4rem;
   color: var(--Pure-White, #fff);
   font-family: Outfit;
   font-size: 20px;

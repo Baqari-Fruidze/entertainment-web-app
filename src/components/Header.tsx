@@ -7,6 +7,7 @@ import moviesNavigation from "/assets/icon-nav-movies.svg";
 import tvSeriesNavigation from "/assets/icon-nav-tv-series.svg";
 import bookmarkNavigation from "/assets/icon-nav-bookmark.svg";
 import personImg from "/assets/image-avatar.png";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const location = useLocation();
@@ -14,22 +15,30 @@ export default function Header() {
     <Container>
       <img src={logo} alt="" />
       <ImagesCon>
-        <HomeIcon src={homeNavigation} alt="" location={location.pathname} />
-        <MoviesIcon
-          src={moviesNavigation}
-          alt=""
-          location={location.pathname}
-        />
-        <TvSeriesIcon
-          src={tvSeriesNavigation}
-          alt=""
-          location={location.pathname}
-        />
-        <BookmarkedIcon
-          src={bookmarkNavigation}
-          alt=""
-          location={location.pathname}
-        />
+        <Link to={"/home"}>
+          <HomeIcon src={homeNavigation} alt="" location={location.pathname} />
+        </Link>
+        <Link to={"/movies"}>
+          <MoviesIcon
+            src={moviesNavigation}
+            alt=""
+            location={location.pathname}
+          />
+        </Link>
+        <Link to={"/tvSeries"}>
+          <TvSeriesIcon
+            src={tvSeriesNavigation}
+            alt=""
+            location={location.pathname}
+          />
+        </Link>
+        <Link to={"/bookmarked"}>
+          <BookmarkedIcon
+            src={bookmarkNavigation}
+            alt=""
+            location={location.pathname}
+          />
+        </Link>
       </ImagesCon>
       <Image src={personImg} alt="" />
     </Container>
