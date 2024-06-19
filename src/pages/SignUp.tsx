@@ -6,9 +6,6 @@ import { Context } from "../App";
 
 export default function Login() {
   const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
-  // const [emptyPasswod, setEmptyPassword] = useState<boolean>(false);
-  // const [emptyEmail, setEmpyEmail] = useState<boolean>(false);
-  // const [Rpassword, setRpassword] = useState<boolean>(false);
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, emailAdress: event.target.value });
   };

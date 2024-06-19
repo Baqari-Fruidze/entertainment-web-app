@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 import { Context } from "../App";
+import { useState } from "react";
+import { TloginEror } from "../types/LoginEror";
 
 export default function Login() {
+  const [empt, setEmpt] = useState<TloginEror>({
+    password: false,
+    emailAdress: false,
+  });
   const { userInfo, setUserInfo } = useContext(Context);
   const handleClickEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, emailAdress: event.target.value });
@@ -12,6 +18,18 @@ export default function Login() {
   const handleClickPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, password: event.target.value });
   };
+  function userInfoChecker() {
+    const savedUserInfo = localStorage.getItem("user");
+    if (savedUserInfo) {
+      savedUser = JSON.parse(savedUserInfo);
+    }
+    if (userInfo.password !== savedUserInfo.password) {
+      setEmpt(() => ({ ...empt, password: true }));
+    }
+    if (userInfo.emailAdress !== savedUserInfo.emailAdress) {
+      setEmpt(() => ({ ...empt, emailAdress: true }));
+    }
+  }
   return (
     <Parent>
       <img src={logo} alt="" />
@@ -23,23 +41,47 @@ export default function Login() {
           value={userInfo.emailAdress}
           onChange={handleClickEmail}
         />
+        {empt.emailAdress ? (
+          <EmailAddressErorSpan>incorrect Email address</EmailAddressErorSpan>
+        ) : null}
         <input
           type="text"
           placeholder="Password"
           value={userInfo.password}
           onChange={handleClickPassword}
         />
+        {empt.password ? (
+          <PaswordErorSpan>incorrect Password</PaswordErorSpan>
+        ) : null}
         <button>Login to your account</button>
         <p>
           Don’t have an account?
           <Link to={"/signUp"}>
-            <span>Sign Up</span>
+            <span className="signUpSpan">Sign Up</span>
           </Link>
         </p>
       </Form>
     </Parent>
   );
 }
+const EmailAddressErorSpan = styled.span`
+  color: var(--Red, #fc4747);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Outfit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
+const PaswordErorSpan = styled.span`
+  color: var(--Red, #fc4747);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Outfit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
 const Form = styled.div`
   padding: 2.4rem 2.4rem 3.2rem;
   display: flex;
@@ -108,7 +150,7 @@ const Form = styled.div`
     font-weight: 400;
     line-height: normal;
   }
-  & span {
+  & .signUpSpan {
     margin-left: 0.8rem;
     color: var(--Red, #fc4747);
     font-feature-settings: "clig" off, "liga" off;
