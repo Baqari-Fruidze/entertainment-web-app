@@ -2,11 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import searchIcon from "/assets/icon-search.svg";
 import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../App";
 
 export default function Input() {
+  const { inputValue, setInputValue } = useContext(Context);
   const location = useLocation();
+  const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+  console.log(inputValue);
   return (
     <Inputt
+      onChange={() => inputHandler}
+      value={inputValue}
       type="text"
       placeholder={
         location.pathname === "/home"

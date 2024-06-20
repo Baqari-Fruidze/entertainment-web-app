@@ -9,7 +9,7 @@ import { Ttrending } from "../types/TrendingType";
 import { Context } from "../App";
 
 export default function Slider() {
-  const { data } = useContext(Context);
+  const { data, statusChanger } = useContext(Context);
   const filtered = data.filter((item) => item.isTrending === true);
   return (
     <Parent>
@@ -34,7 +34,7 @@ export default function Slider() {
               <li>{item.rating}</li>
             </Uul>
             <span>{item.title}</span>
-            <Circle>
+            <Circle onClick={() => statusChanger(item.title)}>
               {item.isBookmarked ? (
                 <img src={bookmarkIconFull} alt="" />
               ) : (

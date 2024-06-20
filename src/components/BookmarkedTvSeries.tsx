@@ -6,7 +6,7 @@ import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 
 export default function BookmarkedTvSeries() {
-  const { data } = useContext(Context);
+  const { data, statusChanger } = useContext(Context);
   return (
     <>
       <HOne>Bookmarked TV Series</HOne>
@@ -29,7 +29,7 @@ export default function BookmarkedTvSeries() {
                 <li>{item.rating}</li>
               </Uul>
               <Htwo>{item.title}</Htwo>
-              <Circle>
+              <Circle onClick={() => statusChanger(item.title)}>
                 {item.isBookmarked ? (
                   <img src={bookmarkIconFull} alt="" />
                 ) : (

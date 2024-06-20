@@ -10,4 +10,6 @@ export interface TuserContext {
   data: Tdata;
   setData: React.Dispatch<React.SetStateAction<Tdata>>;
   statusChanger: (id: string) => void;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  inputValue: string;
 }

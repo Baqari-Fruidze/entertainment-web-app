@@ -7,7 +7,7 @@ import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import { Context } from "../App";
 
 export default function Movies() {
-  const { data } = useContext(Context);
+  const { data, statusChanger } = useContext(Context);
   return (
     <Parent>
       <Input />
@@ -28,7 +28,7 @@ export default function Movies() {
                 <li>{item.rating}</li>
               </Uul>
               <HTwo>{item.title}</HTwo>
-              <Circle>
+              <Circle onClick={() => statusChanger(item.title)}>
                 {item.isBookmarked ? (
                   <img src={bookmarkIconFull} alt="" />
                 ) : (

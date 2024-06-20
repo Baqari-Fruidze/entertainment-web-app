@@ -35,6 +35,8 @@ export const Context = createContext<TuserContext>({
   data: [],
   setData: () => {},
   statusChanger: () => {},
+  inputValue: "",
+  setInputValue: () => {},
 });
 
 function ConditionalHeader() {
@@ -46,6 +48,7 @@ function ConditionalHeader() {
   );
 }
 function App() {
+  const [inputValue, setInputValue] = useState<string>("");
   const statusChanger = (id: string) => {
     setData(() => [
       ...data.map((item) =>
@@ -77,6 +80,8 @@ function App() {
         data,
         setData,
         statusChanger,
+        inputValue,
+        setInputValue,
       }}
     >
       <BrowserRouter>
