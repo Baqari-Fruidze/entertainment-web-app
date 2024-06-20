@@ -6,38 +6,40 @@ import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 
 export default function BookmarkedTvSeries() {
-  const { data, statusChanger } = useContext(Context);
+  const { data, statusChanger, inputValue } = useContext(Context);
+  const filteredData = data.filter(
+    (item) => item.isBookmarked === true && item.category === "TV Series"
+  );
+  const dataToMap =
+    inputValue.length !== 0
+      ? filteredData.filter((item) => item.title.includes(inputValue))
+      : filteredData;
   return (
     <>
       <HOne>Bookmarked TV Series</HOne>
       <BookmarkedTvSeriesCon>
-        {data
-          .filter(
-            (item) =>
-              item.isBookmarked === true && item.category === "TV Series"
-          )
-          .map((item, index) => (
-            <div key={index} className="singleCon">
-              <TvSeriesImg src={item.thumbnail.regular.small} alt="" />
-              <Uul>
-                <li>{item.year}</li>
-                <li>
-                  <TvSeriesIcon src={tvSeriesIcon} alt="" />
+        {dataToMap.map((item, index) => (
+          <div key={index} className="singleCon">
+            <TvSeriesImg src={item.thumbnail.regular.small} alt="" />
+            <Uul>
+              <li>{item.year}</li>
+              <li>
+                <TvSeriesIcon src={tvSeriesIcon} alt="" />
 
-                  {item.category}
-                </li>
-                <li>{item.rating}</li>
-              </Uul>
-              <Htwo>{item.title}</Htwo>
-              <Circle onClick={() => statusChanger(item.title)}>
-                {item.isBookmarked ? (
-                  <img src={bookmarkIconFull} alt="" />
-                ) : (
-                  <img src={bookmarkIconEmpty} alt="" />
-                )}
-              </Circle>
-            </div>
-          ))}
+                {item.category}
+              </li>
+              <li>{item.rating}</li>
+            </Uul>
+            <Htwo>{item.title}</Htwo>
+            <Circle onClick={() => statusChanger(item.title)}>
+              {item.isBookmarked ? (
+                <img src={bookmarkIconFull} alt="" />
+              ) : (
+                <img src={bookmarkIconEmpty} alt="" />
+              )}
+            </Circle>
+          </div>
+        ))}
       </BookmarkedTvSeriesCon>
     </>
   );

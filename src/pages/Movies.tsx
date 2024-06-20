@@ -7,36 +7,39 @@ import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import { Context } from "../App";
 
 export default function Movies() {
-  const { data, statusChanger } = useContext(Context);
+  const { data, statusChanger, inputValue } = useContext(Context);
+  const filterData = data.filter((item) => item.category === "Movie");
+  const dataToMap =
+    inputValue.length !== 0
+      ? filterData.filter((item) => item.title.includes(inputValue))
+      : filterData;
   return (
     <Parent>
       <Input />
       <h1>Movies</h1>
       <MoviesCon>
-        {data
-          .filter((item) => item.category === "Movie")
-          .map((item, index) => (
-            <div className="singleCon" key={index}>
-              <MovieImage src={item.thumbnail.regular.small} alt="" />
-              <Uul>
-                <li>{item.year}</li>
-                <li>
-                  <MovieIcon src={movieIcon} alt="" />
+        {dataToMap.map((item, index) => (
+          <div className="singleCon" key={index}>
+            <MovieImage src={item.thumbnail.regular.small} alt="" />
+            <Uul>
+              <li>{item.year}</li>
+              <li>
+                <MovieIcon src={movieIcon} alt="" />
 
-                  {item.category}
-                </li>
-                <li>{item.rating}</li>
-              </Uul>
-              <HTwo>{item.title}</HTwo>
-              <Circle onClick={() => statusChanger(item.title)}>
-                {item.isBookmarked ? (
-                  <img src={bookmarkIconFull} alt="" />
-                ) : (
-                  <img src={bookmarkIconEmpty} alt="" />
-                )}
-              </Circle>
-            </div>
-          ))}
+                {item.category}
+              </li>
+              <li>{item.rating}</li>
+            </Uul>
+            <HTwo>{item.title}</HTwo>
+            <Circle onClick={() => statusChanger(item.title)}>
+              {item.isBookmarked ? (
+                <img src={bookmarkIconFull} alt="" />
+              ) : (
+                <img src={bookmarkIconEmpty} alt="" />
+              )}
+            </Circle>
+          </div>
+        ))}
       </MoviesCon>
     </Parent>
   );

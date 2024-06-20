@@ -4,9 +4,11 @@ import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
-import { Tdata } from "../types/Data";
 import { Ttrending } from "../types/TrendingType";
 import { Context } from "../App";
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
+import { LOOP } from "@splidejs/splide";
+import { Autoplay, Pagination } from "swiper/modules";
 
 export default function Slider() {
   const { data, statusChanger } = useContext(Context);
@@ -16,33 +18,47 @@ export default function Slider() {
       <Hone>Trending</Hone>
 
       <MoviesCon>
-        {filtered.map((item, index) => (
-          <SingleMovieCon
-            backGroundTrending={item.thumbnail.trending}
-            key={index}
-          >
-            <Uul>
-              <li>{item.year}</li>
-              <li>
-                {item.category === "Movie" ? (
-                  <MovieIcon src={movieIcon} alt="" />
-                ) : (
-                  <TvSeriesIcon src={tvSeriesIcon} alt="" />
-                )}
-                {item.category}
-              </li>
-              <li>{item.rating}</li>
-            </Uul>
-            <span>{item.title}</span>
-            <Circle onClick={() => statusChanger(item.title)}>
-              {item.isBookmarked ? (
-                <img src={bookmarkIconFull} alt="" />
-              ) : (
-                <img src={bookmarkIconEmpty} alt="" />
-              )}
-            </Circle>
-          </SingleMovieCon>
-        ))}
+        <Splide
+          options={{
+            type: "loop",
+            rewind: true,
+            autoplay: true,
+            pagination: true,
+            arrows: false,
+            direction: "ltr",
+            perPage: 1.5,
+          }}
+        >
+          {filtered.map((item, index) => (
+            <SplideSlide key={index}>
+              <SingleMovieCon
+                backGroundTrending={item.thumbnail.trending}
+                key={index}
+              >
+                <Uul>
+                  <li>{item.year}</li>
+                  <li>
+                    {item.category === "Movie" ? (
+                      <MovieIcon src={movieIcon} alt="" />
+                    ) : (
+                      <TvSeriesIcon src={tvSeriesIcon} alt="" />
+                    )}
+                    {item.category}
+                  </li>
+                  <li>{item.rating}</li>
+                </Uul>
+                <span>{item.title}</span>
+                <Circle onClick={() => statusChanger(item.title)}>
+                  {item.isBookmarked ? (
+                    <img src={bookmarkIconFull} alt="" />
+                  ) : (
+                    <img src={bookmarkIconEmpty} alt="" />
+                  )}
+                </Circle>
+              </SingleMovieCon>
+            </SplideSlide>
+          ))}
+        </Splide>
       </MoviesCon>
     </Parent>
   );

@@ -7,10 +7,14 @@ import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 
 export default function RecomendedMovies() {
-  const { data, statusChanger } = useContext(Context);
+  const { data, statusChanger, inputValue } = useContext(Context);
+  const filteredData =
+    inputValue.length !== 0
+      ? data.filter((item) => item.title.includes(inputValue))
+      : data;
   return (
     <RecomendedMoviesCon>
-      {data.map((item, index) => (
+      {filteredData.map((item, index) => (
         <div key={index} className="singleCon">
           <MovieImage src={item.thumbnail.regular.small} alt="" />
           <Uul>
@@ -39,6 +43,15 @@ export default function RecomendedMovies() {
   );
 }
 
+const Para = styled.p`
+  text-align: center;
+  color: var(--Pure-White, #fff);
+  font-family: Outfit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
 const Circle = styled.div`
   opacity: 0.6;
   top: 8px;

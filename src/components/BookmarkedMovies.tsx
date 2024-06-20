@@ -6,37 +6,40 @@ import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
 
 export default function BookmarkedMovies() {
-  const { data, statusChanger } = useContext(Context);
+  const { data, statusChanger, inputValue } = useContext(Context);
+  const filteredData = data.filter(
+    (item) => item.isBookmarked === true && item.category === "Movie"
+  );
+  const dataToMap =
+    inputValue.length !== 0
+      ? filteredData.filter((item) => item.title.includes(inputValue))
+      : filteredData;
   return (
     <>
       <HOne>Bookmarked Movies</HOne>
       <BookmarkedMoviesCon>
-        {data
-          .filter(
-            (item) => item.isBookmarked === true && item.category === "Movie"
-          )
-          .map((item, index) => (
-            <div key={index} className="singleCon">
-              <MovieImage src={item.thumbnail.regular.small} alt="" />
-              <Uul>
-                <li>{item.year}</li>
-                <li>
-                  <MovieIcon src={movieIcon} alt="" />
+        {dataToMap.map((item, index) => (
+          <div key={index} className="singleCon">
+            <MovieImage src={item.thumbnail.regular.small} alt="" />
+            <Uul>
+              <li>{item.year}</li>
+              <li>
+                <MovieIcon src={movieIcon} alt="" />
 
-                  {item.category}
-                </li>
-                <li>{item.rating}</li>
-              </Uul>
-              <Htwo>{item.title}</Htwo>
-              <Circle onClick={() => statusChanger(item.title)}>
-                {item.isBookmarked ? (
-                  <img src={bookmarkIconFull} alt="" />
-                ) : (
-                  <img src={bookmarkIconEmpty} alt="" />
-                )}
-              </Circle>
-            </div>
-          ))}
+                {item.category}
+              </li>
+              <li>{item.rating}</li>
+            </Uul>
+            <Htwo>{item.title}</Htwo>
+            <Circle onClick={() => statusChanger(item.title)}>
+              {item.isBookmarked ? (
+                <img src={bookmarkIconFull} alt="" />
+              ) : (
+                <img src={bookmarkIconEmpty} alt="" />
+              )}
+            </Circle>
+          </div>
+        ))}
       </BookmarkedMoviesCon>
     </>
   );

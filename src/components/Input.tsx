@@ -11,10 +11,9 @@ export default function Input() {
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-  console.log(inputValue);
   return (
     <Inputt
-      onChange={() => inputHandler}
+      onChange={(event) => inputHandler(event)}
       value={inputValue}
       type="text"
       placeholder={
@@ -31,6 +30,7 @@ export default function Input() {
 }
 
 const Inputt = styled.input`
+  outline: none;
   border: none;
   width: 100%;
   background: var(--Dark-Blue, #10141e);
