@@ -4,8 +4,13 @@ import { Context } from "../App";
 import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export default function BookmarkedMovies() {
+  const tablet = useMediaQuery(
+    "only screen and (min-width : 768px) and (max-width:1440px) "
+  );
+  const mobile = useMediaQuery("only screen and (max-width : 768px)");
   const { data, statusChanger, inputValue } = useContext(Context);
   const filteredData = data.filter(
     (item) => item.isBookmarked === true && item.category === "Movie"
@@ -20,7 +25,16 @@ export default function BookmarkedMovies() {
       <BookmarkedMoviesCon>
         {dataToMap.map((item, index) => (
           <div key={index} className="singleCon">
-            <MovieImage src={item.thumbnail.regular.small} alt="" />
+            <MovieImage
+              src={
+                mobile
+                  ? item.thumbnail.regular.small
+                  : tablet
+                  ? item.thumbnail.regular.medium
+                  : item.thumbnail.regular.large
+              }
+              alt=""
+            />
             <Uul>
               <li>{item.year}</li>
               <li>
@@ -57,6 +71,10 @@ const Circle = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(90, 105, 143, 1);
+  @media (min-width: 768px) {
+    top: 16px;
+    right: 16px;
+  }
 `;
 const Htwo = styled.h2`
   color: var(--Pure-White, #fff);
@@ -65,11 +83,24 @@ const Htwo = styled.h2`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  @media (min-width: 768px) {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Outfit;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 `;
 const MovieImage = styled.img`
   border-radius: 8px;
   width: 16.4rem;
   height: 11rem;
+  @media (min-width: 768px) {
+    width: 22rem;
+    height: 14rem;
+  }
 `;
 const MovieIcon = styled.img`
   width: 10px;
@@ -91,6 +122,16 @@ const Uul = styled.ul`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    opacity: 0.75;
+    @media (min-width: 768px) {
+      color: var(--Pure-White, #fff);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Outfit;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 
   & li:not(:last-child)::after {
@@ -104,6 +145,10 @@ const BookmarkedMoviesCon = styled.div`
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2.4rem;
+  @media (min-width: 768px) {
+    gap: 3rem;
+    margin-bottom: 4.8rem;
+  }
   & .singleCon {
     position: relative;
   }
@@ -118,4 +163,14 @@ const HOne = styled.h1`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.312px;
+  @media (min-width: 768px) {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Outfit;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.5px;
+  }
 `;
