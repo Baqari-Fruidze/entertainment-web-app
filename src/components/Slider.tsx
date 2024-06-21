@@ -21,12 +21,12 @@ export default function Slider() {
         <Splide
           options={{
             type: "loop",
-            rewind: true,
             autoplay: true,
-            pagination: true,
+            rewind: true,
+            pagination: false,
             arrows: false,
-            direction: "ltr",
-            perPage: 1.5,
+            gap: "1rem",
+            intervall: 1000,
           }}
         >
           {filtered.map((item, index) => (
@@ -145,6 +145,10 @@ const MoviesCon = styled.div`
   display: flex;
   gap: 1.6rem;
   position: relative;
+  height: 14rem;
+  & .splide__list {
+    display: flex;
+  }
 `;
 const Parent = styled.div`
   display: flex;
