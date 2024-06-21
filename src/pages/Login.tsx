@@ -138,7 +138,7 @@ const Form = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 0.5rem 0 1.8rem 1.6rem;
+    padding: 1.3rem 0 1.3rem 1.6rem;
     border: none;
     border-bottom: 1px solid grey;
     background: var(--Semi-Dark-Blue, #161d2f);
@@ -200,6 +200,8 @@ const Parent = styled.div`
   width: 100%;
   background: var(--Dark-Blue, #10141e);
   min-height: 100vh;
+  max-width: 32.7rem;
+  margin: 0 auto;
   & img {
     display: block;
     margin-left: auto;

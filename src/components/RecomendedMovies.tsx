@@ -5,8 +5,13 @@ import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
 import { Context } from "../App";
 import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 export default function RecomendedMovies() {
+  const tablet = useMediaQuery(
+    "only screen and (min-width : 768px) and (max-width:1440px) "
+  );
+  const mobile = useMediaQuery("only screen and (max-width : 768px)");
   const { data, statusChanger, inputValue } = useContext(Context);
   const filteredData =
     inputValue.length !== 0
@@ -16,7 +21,16 @@ export default function RecomendedMovies() {
     <RecomendedMoviesCon>
       {filteredData.map((item, index) => (
         <div key={index} className="singleCon">
-          <MovieImage src={item.thumbnail.regular.small} alt="" />
+          <MovieImage
+            src={
+              mobile
+                ? item.thumbnail.regular.small
+                : tablet
+                ? item.thumbnail.regular.medium
+                : item.thumbnail.regular.large
+            }
+            alt=""
+          />
           <Uul>
             <li>{item.year}</li>
             <li>
@@ -55,6 +69,10 @@ const Circle = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(90, 105, 143, 1);
+  @media (min-width: 768px) {
+    top: 16px;
+    right: 16px;
+  }
 `;
 const Hone = styled.h1`
   color: var(--Pure-White, #fff);
@@ -63,11 +81,24 @@ const Hone = styled.h1`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  @media (min-width: 768px) {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Outfit;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 `;
 const MovieImage = styled.img`
   border-radius: 8px;
   width: 16.4rem;
   height: 11rem;
+  @media (min-width: 768px) {
+    width: 22rem;
+    height: 14rem;
+  }
 `;
 const TvSeriesIcon = styled.img`
   width: 12px;
@@ -95,6 +126,15 @@ const Uul = styled.ul`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    @media (min-width: 768px) {
+      color: var(--Pure-White, #fff);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Outfit;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 
   & li:not(:last-child)::after {
@@ -107,8 +147,11 @@ const RecomendedMoviesCon = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  padding: 0 1.6rem 2rem 1.6rem;
+  padding: 0 0 2rem 0;
   .singleCon {
     position: relative;
+  }
+  @media (min-width: 768px) {
+    gap: 2.9rem;
   }
 `;

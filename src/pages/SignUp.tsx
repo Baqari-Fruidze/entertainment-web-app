@@ -145,8 +145,8 @@ const Form = styled.div`
     background: var(--Semi-Dark-Blue, #161d2f);
     /* margin-bottom: 2.4rem; */
   }
-  ::placeholder {
-    color: var(--Pure-White, #fff);
+  & ::placeholder {
+    color: #fff;
     font-feature-settings: "clig" off, "liga" off;
     opacity: 0.5;
     font-family: Outfit;
@@ -198,6 +198,8 @@ const Parent = styled.div`
   width: 100%;
   background: var(--Dark-Blue, #10141e);
   min-height: 100vh;
+  max-width: 32.7rem;
+  margin: 0 auto;
   & img {
     display: block;
     margin-left: auto;

@@ -36,6 +36,7 @@ const Inputt = styled.input`
   background: var(--Dark-Blue, #10141e);
   background-image: url(${searchIcon});
   background-repeat: no-repeat;
+  background-position: left center;
   padding: 1rem 0 1rem 4.5rem;
   color: var(--Pure-White, #fff);
   font-family: Outfit;
@@ -43,6 +44,16 @@ const Inputt = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  @media (min-width: 768px) {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Outfit;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 5.5rem;
+  }
 
   &::placeholder {
     color: var(--Pure-White, #fff);
@@ -52,5 +63,14 @@ const Inputt = styled.input`
     font-weight: 400;
     line-height: normal;
     opacity: 0.4979;
+    @media (min-width: 768px) {
+      color: var(--Pure-White, #fff);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Outfit;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 `;

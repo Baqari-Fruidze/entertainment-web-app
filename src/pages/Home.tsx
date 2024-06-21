@@ -25,8 +25,21 @@ const Hone = styled.h1`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.312px;
+  @media (min-width: 768px) {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    font-family: Outfit;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.5px;
+  }
 `;
 const Parent = styled.div`
   background: var(--Dark-Blue, #10141e);
-  padding: 2.6rem 0 3rem 0;
+  padding: 2.6rem 1.6rem 3rem 1.6rem;
+  @media (min-width: 768px) {
+    padding: 2.4rem 2.5rem;
+  }
 `;

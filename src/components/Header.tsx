@@ -72,15 +72,25 @@ const HomeIcon = styled.img<{ location: string }>`
 const Image = styled.img`
   width: 24px;
   height: 24px;
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 const ImagesCon = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  @media (min-width: 768px) {
+    gap: 2.5rem;
+  }
 `;
 const Container = styled.div`
   background: var(--Semi-Dark-Blue, #161d2f);
   padding: 2rem 1.6rem;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 768px) {
+    padding: 3.4rem;
+  }
 `;
