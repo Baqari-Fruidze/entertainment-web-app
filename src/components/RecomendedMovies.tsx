@@ -43,15 +43,6 @@ export default function RecomendedMovies() {
   );
 }
 
-const Para = styled.p`
-  text-align: center;
-  color: var(--Pure-White, #fff);
-  font-family: Outfit;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
 const Circle = styled.div`
   opacity: 0.6;
   top: 8px;

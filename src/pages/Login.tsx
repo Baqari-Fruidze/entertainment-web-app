@@ -56,24 +56,29 @@ export default function Login() {
       <img src={logo} alt="" />
       <Form>
         <h1>Login</h1>
-        <input
-          type="text"
-          placeholder="Email address"
-          value={userInfo.emailAdress}
-          onChange={handleClickEmail}
-        />
-        {empt.emailAdress ? (
-          <EmailAddressErorSpan>incorrect Email address</EmailAddressErorSpan>
-        ) : null}
-        <input
-          type="text"
-          placeholder="Password"
-          value={userInfo.password}
-          onChange={handleClickPassword}
-        />
-        {empt.password ? (
-          <PaswordErorSpan>incorrect Password</PaswordErorSpan>
-        ) : null}
+        <div>
+          <input
+            type="text"
+            placeholder="Email address"
+            value={userInfo.emailAdress}
+            onChange={handleClickEmail}
+          />
+          {empt.emailAdress ? (
+            <EmailAddressErorSpan>incorrect Email address</EmailAddressErorSpan>
+          ) : null}
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Password"
+            value={userInfo.password}
+            onChange={handleClickPassword}
+          />
+          {empt.password ? (
+            <PaswordErorSpan>incorrect Password</PaswordErorSpan>
+          ) : null}
+        </div>
+
         <button onClick={userInfoChecker}>Login to your account</button>
         <p>
           Don’t have an account?
@@ -86,7 +91,7 @@ export default function Login() {
   );
 }
 const EmailAddressErorSpan = styled.span`
-  bottom: 0;
+  right: 0;
   position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
@@ -97,6 +102,7 @@ const EmailAddressErorSpan = styled.span`
   line-height: normal;
 `;
 const PaswordErorSpan = styled.span`
+  right: 0;
   position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
@@ -124,7 +130,7 @@ const Form = styled.div`
     margin-bottom: 4rem;
   }
   & input {
-    position: relative;
+    width: 100%;
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;
     font-family: Outfit;
@@ -184,6 +190,9 @@ const Form = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  & div {
+    position: relative;
   }
 `;
 const Parent = styled.div`
