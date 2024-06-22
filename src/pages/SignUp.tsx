@@ -110,6 +110,12 @@ const Form = styled.div`
   flex-direction: column;
   border-radius: 10px;
   background: var(--Semi-Dark-Blue, #161d2f);
+  width: 32.7rem;
+  margin: 0 auto;
+  @media (min-width: 768px) {
+    width: 40rem;
+    padding: 3.2rem;
+  }
   .repeatedPassContainer {
     position: relative;
   }
@@ -143,7 +149,9 @@ const Form = styled.div`
     border: none;
     border-bottom: 1px solid grey;
     background: var(--Semi-Dark-Blue, #161d2f);
-    /* margin-bottom: 2.4rem; */
+    @media (min-width: 768px) {
+      padding: 2rem 0 2rem 1.6rem;
+    }
   }
   & ::placeholder {
     color: #fff;
@@ -173,7 +181,7 @@ const Form = styled.div`
   }
   & p {
     display: inline;
-
+    text-align: center;
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;
     font-family: Outfit;
@@ -198,12 +206,13 @@ const Parent = styled.div`
   width: 100%;
   background: var(--Dark-Blue, #10141e);
   min-height: 100vh;
-  max-width: 32.7rem;
-  margin: 0 auto;
   & img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5.8rem;
+    @media (min-width: 768px) {
+      margin-bottom: 7.2rem;
+    }
   }
 `;

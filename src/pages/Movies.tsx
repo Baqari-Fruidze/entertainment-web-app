@@ -119,5 +119,16 @@ const Parent = styled.div`
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.312px;
+    @media (min-width: 768px) {
+      margin-top: 3.4rem;
+      color: var(--Pure-White, #fff);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Outfit;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.5px;
+    }
   }
 `;
