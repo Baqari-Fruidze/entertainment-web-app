@@ -86,11 +86,15 @@ const ImagesCon = styled.div`
   }
 `;
 const Container = styled.div`
+  border-radius: 10px;
   background: var(--Semi-Dark-Blue, #161d2f);
   padding: 2rem 1.6rem;
   display: flex;
   justify-content: space-between;
   @media (min-width: 768px) {
-    padding: 3.4rem;
+    padding: 2.4rem;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 2.3rem;
   }
 `;

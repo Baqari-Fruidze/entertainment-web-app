@@ -92,6 +92,7 @@ export default function Login() {
 }
 const EmailAddressErorSpan = styled.span`
   right: 0;
+  bottom: 50%;
   position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
@@ -103,6 +104,7 @@ const EmailAddressErorSpan = styled.span`
 `;
 const PaswordErorSpan = styled.span`
   right: 0;
+  bottom: 50%;
   position: absolute;
   color: var(--Red, #fc4747);
   font-feature-settings: "clig" off, "liga" off;
