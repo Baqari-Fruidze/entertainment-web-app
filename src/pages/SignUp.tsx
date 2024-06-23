@@ -206,6 +206,9 @@ const Parent = styled.div`
   width: 100%;
   background: var(--Dark-Blue, #10141e);
   min-height: 100vh;
+  @media (min-width: 1440px) {
+    padding-top: 7.8rem;
+  }
   & img {
     display: block;
     margin-left: auto;

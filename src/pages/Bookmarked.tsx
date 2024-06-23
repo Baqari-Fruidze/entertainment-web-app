@@ -17,5 +17,5 @@ export default function Bookmarked() {
 }
 
 const Parent = styled.div`
-  padding: 2.6rem 1.6rem 2rem 1.6rem;
+  padding: 6.2rem 1.6rem 2rem 1.6rem;
 `;

@@ -136,6 +136,10 @@ const MovieImage = styled.img`
     width: 22rem;
     height: 14rem;
   }
+  @media (min-width: 1440px) {
+    width: 28rem;
+    height: 17.4rem;
+  }
 `;
 const TVSeriesCon = styled.div`
   display: flex;
@@ -143,6 +147,9 @@ const TVSeriesCon = styled.div`
   gap: 1.5rem;
   @media (min-width: 768px) {
     gap: 2.4rem;
+  }
+  @media (min-width: 1440px) {
+    gap: 3.2rem;
   }
   & .singleCon {
     position: relative;
@@ -172,4 +179,7 @@ const HOne = styled.h1`
 `;
 const Parent = styled.div`
   padding: 2.6rem 1.6rem 2rem 1.6rem;
+  @media (min-width: 1440px) {
+    padding-top: 6.2rem;
+  }
 `;

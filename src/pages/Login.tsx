@@ -6,6 +6,7 @@ import { Context } from "../App";
 import { useState } from "react";
 import { TloginEror } from "../types/LoginEror";
 import { useNavigate } from "react-router-dom";
+import { empty } from "@splidejs/splide/src/js/utils";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -62,6 +63,7 @@ export default function Login() {
             placeholder="Email address"
             value={userInfo.emailAdress}
             onChange={handleClickEmail}
+            empty={empt.emailAdress}
           />
           {empt.emailAdress ? (
             <EmailAddressErorSpan>incorrect Email address</EmailAddressErorSpan>
@@ -73,6 +75,7 @@ export default function Login() {
             placeholder="Password"
             value={userInfo.password}
             onChange={handleClickPassword}
+            empty={empt.password}
           />
           {empt.password ? (
             <PaswordErorSpan>incorrect Password</PaswordErorSpan>
@@ -114,7 +117,7 @@ const PaswordErorSpan = styled.span`
   font-weight: 400;
   line-height: normal;
 `;
-const Form = styled.div`
+const Form = styled.div<{ empty: TloginEror }>`
   padding: 2.4rem 2.4rem 3.2rem;
   display: flex;
   flex-direction: column;
@@ -148,7 +151,8 @@ const Form = styled.div`
     line-height: normal;
     padding: 1.3rem 0 1.3rem 1.6rem;
     border: none;
-    border-bottom: 1px solid grey;
+    border-bottom: ${(props) =>
+      props.empty ? "1px solid red" : "1px solid grey "};
     background: var(--Semi-Dark-Blue, #161d2f);
     margin-bottom: 2.4rem;
   }
@@ -208,6 +212,9 @@ const Parent = styled.div`
   width: 100%;
   background: var(--Dark-Blue, #10141e);
   min-height: 100vh;
+  @media (min-width: 1440px) {
+    padding-top: 7.8rem;
+  }
   & img {
     display: block;
     margin-left: auto;

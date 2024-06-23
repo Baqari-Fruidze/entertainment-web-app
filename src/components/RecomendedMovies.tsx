@@ -99,6 +99,10 @@ const MovieImage = styled.img`
     width: 22rem;
     height: 14rem;
   }
+  @media (min-width: 1440px) {
+    width: 28rem;
+    height: 17.4rem;
+  }
 `;
 const TvSeriesIcon = styled.img`
   width: 12px;
@@ -153,5 +157,8 @@ const RecomendedMoviesCon = styled.div`
   }
   @media (min-width: 768px) {
     gap: 2.9rem;
+  }
+  @media (min-width: 1440px) {
+    gap: 3.2rem;
   }
 `;

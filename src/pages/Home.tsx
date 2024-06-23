@@ -43,5 +43,6 @@ const Parent = styled.div`
     padding: 2.4rem 2.5rem;
   }
   @media (min-width: 1440px) {
+    padding: 6.2rem 3.6rem 1rem;
   }
 `;

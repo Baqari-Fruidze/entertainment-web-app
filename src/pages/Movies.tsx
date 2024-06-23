@@ -138,6 +138,10 @@ const MovieImage = styled.img`
     width: 22rem;
     height: 14rem;
   }
+  @media (min-width: 1440px) {
+    width: 28rem;
+    height: 17.4rem;
+  }
 `;
 const MoviesCon = styled.div`
   display: flex;
@@ -145,6 +149,9 @@ const MoviesCon = styled.div`
   gap: 1.5rem;
   @media (min-width: 768px) {
     gap: 2.4rem;
+  }
+  @media (min-width: 1440px) {
+    gap: 3.2rem;
   }
   & .singleCon {
     position: relative;
@@ -154,6 +161,9 @@ const Parent = styled.div`
   padding: 2.6rem 1.6rem 2rem 1.6rem;
   @media (min-width: 768px) {
     padding: 2.6rem;
+  }
+  @media (min-width: 1440px) {
+    padding-top: 6.2rem;
   }
   & h1 {
     margin-bottom: 2.4rem;

@@ -118,5 +118,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 13.6rem;
     padding: 3.5rem 2.8rem;
+    margin-top: 3.2rem;
+    margin-left: 3.2rem;
   }
 `;

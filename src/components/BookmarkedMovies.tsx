@@ -101,6 +101,10 @@ const MovieImage = styled.img`
     width: 22rem;
     height: 14rem;
   }
+  @media (min-width: 1440px) {
+    width: 28rem;
+    height: 17.4rem;
+  }
 `;
 const MovieIcon = styled.img`
   width: 10px;
@@ -148,6 +152,9 @@ const BookmarkedMoviesCon = styled.div`
   @media (min-width: 768px) {
     gap: 3rem;
     margin-bottom: 4.8rem;
+  }
+  @media (min-width: 1440px) {
+    gap: 3.2rem;
   }
   & .singleCon {
     position: relative;

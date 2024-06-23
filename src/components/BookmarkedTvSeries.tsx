@@ -138,6 +138,10 @@ const TvSeriesImg = styled.img`
     width: 22rem;
     height: 14rem;
   }
+  @media (min-width: 1440px) {
+    width: 28rem;
+    height: 17.4rem;
+  }
 `;
 const BookmarkedTvSeriesCon = styled.div`
   display: flex;
@@ -145,6 +149,9 @@ const BookmarkedTvSeriesCon = styled.div`
   gap: 1.5rem;
   @media (min-width: 768px) {
     gap: 3rem;
+  }
+  @media (min-width: 1440px) {
+    gap: 3.2rem;
   }
   & .singleCon {
     position: relative;
