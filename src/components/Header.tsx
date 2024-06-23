@@ -13,7 +13,7 @@ export default function Header() {
   const location = useLocation();
   return (
     <Container>
-      <img src={logo} alt="" />
+      <Logo src={logo} alt="" />
       <ImagesCon>
         <Link to={"/home"}>
           <HomeIcon src={homeNavigation} alt="" location={location.pathname} />
@@ -69,12 +69,22 @@ const HomeIcon = styled.img<{ location: string }>`
       ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
       : null};
 `;
+
+const Logo = styled.img`
+  width: 32px;
+  height: 25px;
+`;
 const Image = styled.img`
   width: 24px;
   height: 24px;
   @media (min-width: 768px) {
     width: 32px;
     height: 32px;
+  }
+  @media (min-width: 1440px) {
+    width: 4rem;
+    height: 4rem;
+    margin-top: auto;
   }
 `;
 const ImagesCon = styled.div`
@@ -83,6 +93,10 @@ const ImagesCon = styled.div`
   gap: 1.5rem;
   @media (min-width: 768px) {
     gap: 2.5rem;
+  }
+  @media (min-width: 1440px) {
+    flex-direction: column;
+    gap: 4rem;
   }
 `;
 const Container = styled.div`
@@ -96,5 +110,13 @@ const Container = styled.div`
     width: 95%;
     margin: 0 auto;
     margin-top: 2.3rem;
+  }
+  @media (min-width: 1440px) {
+    height: 96rem;
+    width: 9.6rem;
+    border-radius: 20px;
+    flex-direction: column;
+    gap: 13.6rem;
+    padding: 3.5rem 2.8rem;
   }
 `;

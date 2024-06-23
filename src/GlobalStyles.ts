@@ -13,5 +13,10 @@ body{
     font-family: "Outfit", sans-serif;
     background: var(--Dark-Blue, #10141E);
 }
+#root{
+    @media (min-width: 1440px) {
+    display: flex;
+  }
+}
 
 `;
