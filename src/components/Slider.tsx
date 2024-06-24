@@ -12,16 +12,12 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
 export default function Slider() {
-  const tablet = useMediaQuery(
-    "only screen and (min-width : 768px) and (max-width:1440px) "
-  );
   const mobile = useMediaQuery("only screen and (max-width : 768px)");
   const { data, statusChanger } = useContext(Context);
   const filtered = data.filter((item) => item.isTrending === true);
   return (
     <Parent>
       <Hone>Trending</Hone>
-
       <MoviesCon>
         <Splide
           options={{
@@ -37,7 +33,11 @@ export default function Slider() {
           {filtered.map((item, index) => (
             <SplideSlide key={index}>
               <SingleMovieCon
-                backGroundTrending={item.thumbnail.trending}
+                backGroundTrending={
+                  mobile
+                    ? item.thumbnail.trending?.small
+                    : item.thumbnail.trending?.large
+                }
                 key={index}
               >
                 <Uul>
@@ -150,17 +150,17 @@ const Uul = styled.ul`
   }
 `;
 const SingleMovieCon = styled.div<{
-  backGroundTrending: Ttrending | undefined;
+  backGroundTrending: string | undefined;
 }>`
   position: relative;
-  background-image: url(${(props) => props?.backGroundTrending?.small});
+  background-image: url(${(props) => props.backGroundTrending});
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
   padding: 8.8rem 0 1.6rem 1.6rem;
   min-width: 24rem;
   @media (min-width: 768px) {
-    background-image: url(${(props) => props.backGroundTrending?.large});
+    background-image: url(${(props) => props.backGroundTrending});
     padding: 15.4rem 0 2.4rem 2.4rem;
     min-width: 47rem;
   }
@@ -184,7 +184,7 @@ const SingleMovieCon = styled.div<{
   }
 `;
 const MoviesCon = styled.div`
-  overflow: scroll;
+  overflow-x: hidden;
   display: flex;
   gap: 1.6rem;
   position: relative;

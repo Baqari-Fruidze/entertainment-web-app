@@ -36,14 +36,15 @@ export default function Login() {
           "password" in parsedUserInfo &&
           "emailAdress" in parsedUserInfo
         ) {
-          if (userInfo.password !== parsedUserInfo.password) {
-            setEmpt((prevEmpt) => ({ ...prevEmpt, password: true }));
-            return;
-          }
           if (userInfo.emailAdress !== parsedUserInfo.emailAdress) {
             setEmpt((prevEmpt) => ({ ...prevEmpt, emailAdress: true }));
             return;
           }
+          if (userInfo.password !== parsedUserInfo.password) {
+            setEmpt((prevEmpt) => ({ ...prevEmpt, password: true }));
+            return;
+          }
+
           navigate("/home");
         }
       } catch (error) {
@@ -55,7 +56,7 @@ export default function Login() {
   return (
     <Parent>
       <img src={logo} alt="" />
-      <Form empty={empt}>
+      <Form>
         <h1>Login</h1>
         <div>
           <EmailInput
@@ -63,7 +64,7 @@ export default function Login() {
             placeholder="Email address"
             value={userInfo.emailAdress}
             onChange={handleClickEmail}
-            empty={empt.emailAdress}
+            empty={empt.emailAdress.toString()}
           />
           {empt.emailAdress ? (
             <EmailAddressErorSpan>incorrect Email address</EmailAddressErorSpan>
@@ -75,7 +76,7 @@ export default function Login() {
             placeholder="Password"
             value={userInfo.password}
             onChange={handleClickPassword}
-            empty={empt.password}
+            empty={empt.password.toString()}
           />
           {empt.password ? (
             <PaswordErorSpan>incorrect Password</PaswordErorSpan>
@@ -94,7 +95,7 @@ export default function Login() {
   );
 }
 
-const EmailInput = styled.input<{ emailAdress: string }>`
+const EmailInput = styled.input<{ empty: string }>`
   width: 100%;
   color: var(--Pure-White, #fff);
   font-feature-settings: "clig" off, "liga" off;
@@ -106,7 +107,7 @@ const EmailInput = styled.input<{ emailAdress: string }>`
   padding: 1.3rem 0 1.3rem 1.6rem;
   border: none;
   border-bottom: ${(props) =>
-    props.emailAdress ? "1px solid red" : "1px solid grey "};
+    props.empty === "true" ? "1px solid red" : "1px solid grey "};
   background: var(--Semi-Dark-Blue, #161d2f);
   margin-bottom: 2.4rem;
   & ::placeholder {
@@ -120,7 +121,7 @@ const EmailInput = styled.input<{ emailAdress: string }>`
     line-height: normal;
   }
 `;
-const PasswordInput = styled.input<{ password: string }>`
+const PasswordInput = styled.input<{ empty: string }>`
   width: 100%;
   color: var(--Pure-White, #fff);
   font-feature-settings: "clig" off, "liga" off;
@@ -132,7 +133,7 @@ const PasswordInput = styled.input<{ password: string }>`
   padding: 1.3rem 0 1.3rem 1.6rem;
   border: none;
   border-bottom: ${(props) =>
-    props.password ? "1px solid red" : "1px solid grey "};
+    props.empty === "true" ? "1px solid red" : "1px solid grey "};
   background: var(--Semi-Dark-Blue, #161d2f);
   margin-bottom: 2.4rem;
   & ::placeholder {
@@ -170,7 +171,7 @@ const PaswordErorSpan = styled.span`
   font-weight: 400;
   line-height: normal;
 `;
-const Form = styled.div<{ empty: TloginEror }>`
+const Form = styled.div`
   padding: 2.4rem 2.4rem 3.2rem;
   display: flex;
   flex-direction: column;
