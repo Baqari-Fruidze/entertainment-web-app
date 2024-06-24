@@ -44,6 +44,9 @@ const Inputt = styled.input`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  &:hover {
+    cursor: pointer;
+  }
   @media (min-width: 768px) {
     color: var(--Pure-White, #fff);
     font-feature-settings: "clig" off, "liga" off;

@@ -178,6 +178,10 @@ const Form = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    &:hover {
+      background: #fff;
+      color: var(--Semi-Dark-Blue, #161d2f);
+    }
   }
   & p {
     display: inline;

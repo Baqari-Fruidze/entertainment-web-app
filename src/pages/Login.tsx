@@ -55,10 +55,10 @@ export default function Login() {
   return (
     <Parent>
       <img src={logo} alt="" />
-      <Form>
+      <Form empty={empt}>
         <h1>Login</h1>
         <div>
-          <input
+          <EmailInput
             type="text"
             placeholder="Email address"
             value={userInfo.emailAdress}
@@ -70,7 +70,7 @@ export default function Login() {
           ) : null}
         </div>
         <div>
-          <input
+          <PasswordInput
             type="text"
             placeholder="Password"
             value={userInfo.password}
@@ -93,6 +93,59 @@ export default function Login() {
     </Parent>
   );
 }
+
+const EmailInput = styled.input<{ emailAdress: string }>`
+  width: 100%;
+  color: var(--Pure-White, #fff);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Outfit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 1.3rem 0 1.3rem 1.6rem;
+  border: none;
+  border-bottom: ${(props) =>
+    props.emailAdress ? "1px solid red" : "1px solid grey "};
+  background: var(--Semi-Dark-Blue, #161d2f);
+  margin-bottom: 2.4rem;
+  & ::placeholder {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    opacity: 0.5;
+    font-family: Outfit;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+`;
+const PasswordInput = styled.input<{ password: string }>`
+  width: 100%;
+  color: var(--Pure-White, #fff);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Outfit;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 1.3rem 0 1.3rem 1.6rem;
+  border: none;
+  border-bottom: ${(props) =>
+    props.password ? "1px solid red" : "1px solid grey "};
+  background: var(--Semi-Dark-Blue, #161d2f);
+  margin-bottom: 2.4rem;
+  & ::placeholder {
+    color: var(--Pure-White, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    opacity: 0.5;
+    font-family: Outfit;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+`;
 const EmailAddressErorSpan = styled.span`
   right: 0;
   bottom: 50%;
@@ -140,32 +193,7 @@ const Form = styled.div<{ empty: TloginEror }>`
     letter-spacing: -0.5px;
     margin-bottom: 4rem;
   }
-  & input {
-    width: 100%;
-    color: var(--Pure-White, #fff);
-    font-feature-settings: "clig" off, "liga" off;
-    font-family: Outfit;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding: 1.3rem 0 1.3rem 1.6rem;
-    border: none;
-    border-bottom: ${(props) =>
-      props.empty ? "1px solid red" : "1px solid grey "};
-    background: var(--Semi-Dark-Blue, #161d2f);
-    margin-bottom: 2.4rem;
-  }
-  ::placeholder {
-    color: var(--Pure-White, #fff);
-    font-feature-settings: "clig" off, "liga" off;
-    opacity: 0.5;
-    font-family: Outfit;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
+
   & button {
     border: none;
     margin-top: 1.6rem;
@@ -181,6 +209,10 @@ const Form = styled.div<{ empty: TloginEror }>`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    &:hover {
+      background: #fff;
+      color: var(--Semi-Dark-Blue, #161d2f);
+    }
   }
   & p {
     display: inline;

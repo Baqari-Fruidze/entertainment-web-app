@@ -50,24 +50,40 @@ const BookmarkedIcon = styled.img<{ location: string }>`
     props.location === "/bookmarked"
       ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
       : null};
+  &:hover {
+    filter: invert(12%) sepia(94%) saturate(7485%) hue-rotate(1deg)
+      brightness(100%) contrast(109%);
+  }
 `;
 const TvSeriesIcon = styled.img<{ location: string }>`
   filter: ${(props) =>
     props.location === "/tvSeries"
       ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
       : null};
+  &:hover {
+    filter: invert(12%) sepia(94%) saturate(7485%) hue-rotate(1deg)
+      brightness(100%) contrast(109%);
+  }
 `;
 const MoviesIcon = styled.img<{ location: string }>`
   filter: ${(props) =>
     props.location === "/movies"
       ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
       : null};
+  &:hover {
+    filter: invert(12%) sepia(94%) saturate(7485%) hue-rotate(1deg)
+      brightness(100%) contrast(109%);
+  }
 `;
 const HomeIcon = styled.img<{ location: string }>`
   filter: ${(props) =>
     props.location === "/home"
       ? "brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(103deg) brightness(105%) contrast(105%)"
       : null};
+  &:hover {
+    filter: invert(12%) sepia(94%) saturate(7485%) hue-rotate(1deg)
+      brightness(100%) contrast(109%);
+  }
 `;
 
 const Logo = styled.img`
