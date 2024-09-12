@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import bookmarkIconEmpty from "/assets/icon-bookmark-empty.svg";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
 import movieIcon from "/assets/icon-nav-movies.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";
-import { Ttrending } from "../types/TrendingType";
 import { Context } from "../App";
-import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
-import { LOOP } from "@splidejs/splide";
-import { Autoplay, Pagination } from "swiper/modules";
+// @ts-expect-error
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
 export default function Slider() {

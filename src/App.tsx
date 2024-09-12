@@ -13,7 +13,6 @@ import { TuserContext } from "./types/ContextType";
 import { Teror } from "./types/Eror";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import { useEffect } from "react";
 import { Tdata } from "./types/Data";
 import info from "../src/data.json";
 import Movies from "./pages/Movies";

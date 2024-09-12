@@ -6,7 +6,6 @@ import { Context } from "../App";
 import { useState } from "react";
 import { TloginEror } from "../types/LoginEror";
 import { useNavigate } from "react-router-dom";
-import { empty } from "@splidejs/splide/src/js/utils";
 
 export default function Login() {
   const navigate = useNavigate();

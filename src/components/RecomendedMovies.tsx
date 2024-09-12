@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import movieIcon from "/assets/icon-nav-movies.svg";
 import tvSeriesIcon from "/assets/icon-nav-tv-series.svg";

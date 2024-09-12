@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../App";
 import bookmarkIconFull from "/assets/icon-bookmark-full.svg";
