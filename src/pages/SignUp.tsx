@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import logo from "/assets/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../App";
-import { Navigate } from "react-router-dom";
-
 export default function Login() {
+  const navigate = useNavigate();
   const { userInfo, setUserInfo, eror, setEror } = useContext(Context);
   const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, emailAdress: event.target.value });
@@ -24,7 +23,7 @@ export default function Login() {
         password: userInfo.password.length === 0,
         Rpassword: userInfo.Rpassword.length === 0,
       },
-      same: userInfo.password !== userInfo.Rpassword,
+      same: userInfo.password === userInfo.Rpassword,
     };
 
     setEror(newErrors);
@@ -32,10 +31,10 @@ export default function Login() {
       !newErrors.empty.email &&
       !newErrors.empty.password &&
       !newErrors.empty.Rpassword &&
-      !newErrors.same
+      newErrors.same
     ) {
       localStorage.setItem("user", JSON.stringify(userInfo));
-      <Navigate to={"login"} />;
+      navigate("/login");
     }
   }
 
@@ -69,7 +68,7 @@ export default function Login() {
             value={userInfo.Rpassword}
             onChange={RpasswordHandler}
           />
-          {eror.same ? <ErorSame>PASSWORD MUST BE SAME</ErorSame> : null}
+          {!eror.same ? <ErorSame>PASSWORD MUST BE SAME</ErorSame> : null}
           {eror.empty.Rpassword ? <EmptyEror>Can’t be empty</EmptyEror> : null}
         </div>
 
